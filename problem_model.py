@@ -89,12 +89,12 @@ class ProblemModel:
         current_orientation_index = self.orientations.index(orientation)
         new_orientation_index_right = (current_orientation_index + 1) % 4
         new_orientation_right = self.orientations[new_orientation_index_right]
-        potential_successors.append((((x, y), new_orientation_right), 1.5, "virar_direita"))
+        potential_successors.append((((x, y), new_orientation_right), 0.5, "virar_direita"))
 
         # Virar à esquerda
         new_orientation_index_left = (current_orientation_index - 1 + 4) % 4
         new_orientation_left = self.orientations[new_orientation_index_left]
-        potential_successors.append((((x, y), new_orientation_left), 1.5, "virar_esquerda"))
+        potential_successors.append((((x, y), new_orientation_left), 0.5, "virar_esquerda"))
         
         # Ordena os sucessores com base na prioridade de expansão definida
         sorted_successors = sorted(potential_successors, key=lambda s: self.expansion_priority.get(s[0][1], 999))
@@ -111,4 +111,5 @@ class ProblemModel:
         """Calcula a heurística da Distância de Manhattan."""
         (x1, y1), _ = state
         (x2, y2), _ = goal_state
+
         return abs(x1 - x2) + abs(y1 - y2)
