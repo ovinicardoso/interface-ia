@@ -1,8 +1,8 @@
 # INSTRUÇÕES DE EXECUÇÃO
 
 ## Pré-requisitos:
-Python 3.x instalado
-Biblioteca Tkinter (já inclusa na instalação padrão do Python)
+- Python 3.x instalado
+- Biblioteca Tkinter (já inclusa na instalação padrão do Python)
 
 ## Execução:
 Execute o arquivo gui_app.py usando o comando: python gui_app.py
