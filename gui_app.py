@@ -12,6 +12,7 @@ class PathfindingApp(tk.Tk):
         super().__init__()
         self.title("Busca de Caminho para Veículos Autônomos")
         self.geometry("1200x800")
+        self.state('zoomed')
 
         self.problem_model = problem_model
         self.search_algorithms = search_algorithms
@@ -280,4 +281,5 @@ if __name__ == "__main__":
     search_algorithms = SearchAlgorithms(problem_model)
 
     app = PathfindingApp(problem_model, search_algorithms)
+
     app.mainloop()
