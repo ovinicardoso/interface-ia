@@ -36,7 +36,6 @@ class PathfindingApp(tk.Tk):
         controls_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=5)
         controls_frame.grid_columnconfigure(0, weight=1)
 
-        # --- ORDEM CORRIGIDA ---
         # 1. Primeiro, criamos os widgets de Limite
         self.limit_label = ttk.Label(controls_frame, text="Limite (Prof. Limitada/Aprof. Iterativo):")
         self.limit_entry = ttk.Entry(controls_frame)
@@ -45,12 +44,17 @@ class PathfindingApp(tk.Tk):
         # 2. Agora, criamos o menu que pode afetar a visibilidade dos widgets de Limite
         ttk.Label(controls_frame, text="Método de Busca:").grid(row=0, column=0, sticky="w", pady=5)
         self.search_method_var = tk.StringVar(self)
-        search_methods = ["AMPLITUDE", "PROFUNDIDADE", "PROFUNDIDADE LIMITADA", "APROFUNDAMENTO ITERATIVO", "BIDIRECIONAL", "CUSTO UNIFORME"]
+        
+        search_methods = [
+            "AMPLITUDE", "PROFUNDIDADE", "PROFUNDIDADE LIMITADA", 
+            "APROFUNDAMENTO ITERATIVO", "BIDIRECIONAL", "CUSTO UNIFORME",
+            "GREEDY", "A-ESTRELA", "AIA-ESTRELA"
+        ]
         # A função `update_limit_entry_visibility` será chamada sempre que o usuário mudar a opção
         search_method_menu = ttk.OptionMenu(controls_frame, self.search_method_var, search_methods[0], *search_methods, command=self.update_limit_entry_visibility)
         search_method_menu.grid(row=1, column=0, sticky="ew", pady=5)
         
-        # Posiciona os widgets de limite na tela (eles serão escondidos/mostrados pela função de visibilidade)
+        # Posiciona os widgets de limite na tela (escondidos/mostrados pela função de visibilidade)
         self.limit_label.grid(row=2, column=0, sticky="w", pady=5)
         self.limit_entry.grid(row=3, column=0, sticky="ew", pady=5)
 
@@ -67,7 +71,7 @@ class PathfindingApp(tk.Tk):
         self.start_y_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 5))
         self.start_orientation_var = tk.StringVar(self)
         start_orientation_menu = ttk.OptionMenu(start_state_frame, self.start_orientation_var, self.problem_model.orientations[0], *self.problem_model.orientations)
-        self.start_orientation_var.set(self.problem_model.orientations[1]) # 'Leste'
+        self.start_orientation_var.set(self.problem_model.orientations[1])
         start_orientation_menu.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
         # Seleção do estado objetivo
@@ -251,7 +255,10 @@ class PathfindingApp(tk.Tk):
                 "PROFUNDIDADE LIMITADA": lambda i, f: self.search_algorithms.prof_limitada(i, f, limit),
                 "APROFUNDAMENTO ITERATIVO": lambda i, f: self.search_algorithms.aprof_iterativo(i, f, limit),
                 "BIDIRECIONAL": self.search_algorithms.bidirecional,
-                "CUSTO UNIFORME": self.search_algorithms.custo_uniforme
+                "CUSTO UNIFORME": self.search_algorithms.custo_uniforme,
+                "GREEDY": self.search_algorithms.greedy,
+                "A-ESTRELA": self.search_algorithms.a_estrela,
+                "AIA-ESTRELA": self.search_algorithms.aia_estrela
             }
             
             path, cost = search_function_map[search_method](start_state, goal_state)
