@@ -10,7 +10,7 @@ Execute o arquivo gui_app.py usando o comando: python gui_app.py
 ## Funcionalidades
 - Após a execução, a janela principal do simulador será aberta.
 - No painel "Controles de Busca" à esquerda, configure os parâmetros da simulação:
-  - Método de Busca: Selecione um dos algoritmos disponíveis (Amplitude, Custo Uniforme, etc.).
+  - Método de Busca: Selecione um dos algoritmos disponíveis (Amplitude, Profundidade, Profundidade Limitada, Aprofundamento Iterativo, Bidirecional, Custo Uniforme, Greedy, A-Estrela, AIA-Estrela).
   - Limite: Caso utilize "Profundidade Limitada" ou "Aprofundamento Iterativo", defina a profundidade máxima da busca.
   - Estado Inicial e Objetivo: Informe as coordenadas (X, Y) e a orientação de partida e chegada do veículo.
   - Prioridade de Expansão: Reordene a lista de orientações para definir a ordem de exploração dos nós sucessores.
